@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+      <div class="ci-row"><div class="ci-icon">&#128231;</div><div><div class="ci-label">Correo electr&#243;nico</div><div class="ci-value">doctor@raulzuniga.com</div><div class="ci-sub">Consultas e informes</div></div></div><!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -908,6 +909,146 @@ footer {
   .about-facts { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
+
+/* ═══════════════════════════════════════
+   WOW FACTOR — VISUAL ENHANCEMENTS
+═══════════════════════════════════════ */
+
+/* HERO AMBIENT GLOW */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 15%; left: 25%;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(27,107,110,0.16) 0%, rgba(27,107,110,0.05) 50%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+  animation: heroPulse 9s ease-in-out infinite;
+}
+@keyframes heroPulse {
+  0%,100% { transform: scale(1); opacity:1; }
+  50% { transform: scale(1.18); opacity:0.65; }
+}
+
+/* FLOATING PARTICLES */
+.hero-particles { position:absolute; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  opacity: 0;
+  animation: particleFloat linear infinite;
+}
+@keyframes particleFloat {
+  0%   { transform: translateY(0) translateX(0); opacity:0; }
+  12%  { opacity: 0.75; }
+  88%  { opacity: 0.45; }
+  100% { transform: translateY(-140px) translateX(30px); opacity:0; }
+}
+
+/* AI SCAN OVERLAY */
+.hero-scan { position:absolute; inset:0; pointer-events:none; z-index:3; overflow:hidden; }
+.hero-scan::after {
+  content:'';
+  position:absolute;
+  top:0; left:-70%; width:55%; height:100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(27,107,110,0.06) 35%,
+    rgba(212,160,23,0.05) 50%,
+    rgba(27,107,110,0.06) 65%,
+    transparent 100%
+  );
+  animation: scanMove 4.5s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+@keyframes scanMove {
+  0%   { left:-70%; }
+  100% { left:115%; }
+}
+
+/* GLASSMORPHISM CARDS */
+.glass-card {
+  position: absolute;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 16px;
+  padding: 0.9rem 1.3rem;
+  z-index: 10;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  animation: glassFloat ease-in-out infinite;
+}
+.glass-card-val {
+  font-size: 1.35rem; font-weight: 700;
+  color: white; line-height: 1; margin-bottom: 0.2rem;
+}
+.glass-card-label {
+  font-size: 0.62rem; font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.glass-card-icon {
+  font-size: 0.75rem; margin-bottom: 0.3rem;
+  color: var(--gold-bright);
+}
+.gc-patients  { bottom:26%; right:6%;  animation-duration:6.5s; animation-delay:0s; }
+.gc-tech      { top:12%;   right:7%;  animation-duration:8s;   animation-delay:-2.5s; }
+.gc-live      { top:46%;   left:5%;   animation-duration:7s;   animation-delay:-1s; }
+@keyframes glassFloat {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-9px); }
+}
+.gc-dot {
+  display: inline-block; width:6px; height:6px; border-radius:50%;
+  background: var(--gold-bright); margin-right:0.4rem; vertical-align:middle;
+  animation: dotBlink 2.2s ease-in-out infinite;
+}
+@keyframes dotBlink {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%     { opacity:0.4; transform:scale(0.65); }
+}
+
+/* ENTRANCE ANIMATIONS */
+@keyframes fadeUpIn {
+  from { opacity:0; transform:translateY(32px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.fade-up { animation: fadeUpIn 0.85s cubic-bezier(0.4,0,0.2,1) both; }
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.2s;  }
+.d3 { animation-delay: 0.38s; }
+.d4 { animation-delay: 0.54s; }
+.d5 { animation-delay: 0.7s;  }
+
+/* ENHANCED BUTTONS */
+.btn-primary {
+  transition: all 0.32s cubic-bezier(0.4,0,0.2,1) !important;
+  position: relative; overflow: hidden;
+}
+.btn-primary::after {
+  content:''; position:absolute; inset:0; border-radius:50px;
+  background: rgba(255,255,255,0.1);
+  opacity:0; transition:opacity 0.3s;
+}
+.btn-primary:hover::after { opacity:1; }
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.04) !important;
+  box-shadow: 0 22px 52px rgba(27,107,110,0.58) !important;
+}
+.btn-outline { transition: all 0.32s cubic-bezier(0.4,0,0.2,1) !important; }
+.btn-outline:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  background: rgba(255,255,255,0.09) !important;
+  border-color: rgba(255,255,255,0.55) !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.22) !important;
+}
+
+/* GLOBAL SHADOW POLISH */
+.testi-card { box-shadow: 0 2px 20px rgba(13,30,30,0.06); }
+.testi-card:hover { box-shadow: 0 14px 44px rgba(27,107,110,0.13) !important; transform: translateY(-5px) !important; }
+.svc { box-shadow: 0 2px 16px rgba(13,30,30,0.05); }
 </style>
 </head>
 <body>
@@ -936,27 +1077,58 @@ footer {
 <!-- ══ HERO ══ -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Torre Médica Otay · Consultorio 511 · Tijuana</div>
-    <h1 class="hero-h1">
+    <div class="hero-eyebrow fade-up d1">Torre Médica Otay · Consultorio 511 · Tijuana</div>
+    <h1 class="hero-h1 fade-up d2">
       Transforma tu<br>
       <em>piel y bienestar</em><br>
       con ciencia
       <span class="hero-h1-sub">Medicina Estética &amp; Regenerativa</span>
     </h1>
-    <p class="hero-desc">
+    <p class="hero-desc fade-up d3">
       Tratamientos de vanguardia con tecnología de última generación. 
       Atención personalizada para pacientes de Tijuana y San Diego, 
       con resultados reales desde la primera sesión.
     </p>
-    <div class="hero-actions">
+    <div class="hero-actions fade-up d4">
       <a class="btn-primary" href="https://wa.me/526641874089?text=Hola%20Dr.%20Zúñiga%2C%20quiero%20agendar%20una%20cita" target="_blank">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Agendar por WhatsApp
       </a>
       <a class="btn-outline" href="#tratamientos">Ver tratamientos</a>
     </div>
-    <div class="hero-numbers">
-      <div><div class="hero-num-val">20+</div><div class="hero-num-label">Tratamientos</div></div>
+    <div class="hero-numbers fade-up d5">
+      <div><div class="hero-num-val">20+
+    <!-- ✦ Particles -->
+    <div class="hero-particles">
+      <span class="particle" style="left:12%;top:70%;width:3px;height:3px;animation-duration:7s;animation-delay:0s;"></span>
+      <span class="particle" style="left:28%;top:55%;width:2px;height:2px;animation-duration:9s;animation-delay:-2s;"></span>
+      <span class="particle" style="left:45%;top:80%;width:3px;height:3px;animation-duration:6s;animation-delay:-1s;"></span>
+      <span class="particle" style="left:60%;top:60%;width:2px;height:2px;animation-duration:8s;animation-delay:-3s;"></span>
+      <span class="particle" style="left:75%;top:75%;width:4px;height:4px;animation-duration:10s;animation-delay:-0.5s;"></span>
+      <span class="particle" style="left:85%;top:50%;width:2px;height:2px;animation-duration:7.5s;animation-delay:-4s;"></span>
+      <span class="particle" style="left:20%;top:40%;width:3px;height:3px;animation-duration:8.5s;animation-delay:-1.5s;"></span>
+      <span class="particle" style="left:55%;top:30%;width:2px;height:2px;animation-duration:6.5s;animation-delay:-2.5s;"></span>
+    </div>
+
+    <!-- ✦ AI Scan -->
+    <div class="hero-scan"></div>
+
+    <!-- ✦ Glass Cards -->
+    <div class="glass-card gc-patients">
+      <div class="glass-card-icon"><span class="gc-dot"></span>En tiempo real</div>
+      <div class="glass-card-val">+3,200</div>
+      <div class="glass-card-label">Pacientes tratados</div>
+    </div>
+    <div class="glass-card gc-tech">
+      <div class="glass-card-icon">&#9881; Tecnolog&#237;a</div>
+      <div class="glass-card-val">20+</div>
+      <div class="glass-card-label">Tratamientos regenerativos</div>
+    </div>
+    <div class="glass-card gc-live">
+      <div class="glass-card-icon"><span class="gc-dot"></span>Certificado</div>
+      <div class="glass-card-val">C&#233;d.</div>
+      <div class="glass-card-label">11686818</div>
+    </div></div><div class="hero-num-label">Tratamientos</div></div>
       <div><div class="hero-num-val">TJ · SD</div><div class="hero-num-label">Tijuana & San Diego</div></div>
       <div><div class="hero-num-val">511</div><div class="hero-num-label">Consultorio</div></div>
     </div>
@@ -969,6 +1141,38 @@ footer {
       <div class="badge-name">Dr. Raúl Zúñiga</div>
       <div class="badge-spec">Medicina Estética<br>y Regenerativa</div>
       <div class="badge-pill">✓ Céd. 11686818</div>
+    </div>
+  
+    <!-- Particles -->
+    <div class="hero-particles">
+      <span class="particle" style="left:12%;top:70%;width:3px;height:3px;animation-duration:7s;animation-delay:0s;"></span>
+      <span class="particle" style="left:28%;top:55%;width:2px;height:2px;animation-duration:9s;animation-delay:-2s;"></span>
+      <span class="particle" style="left:45%;top:80%;width:3px;height:3px;animation-duration:6s;animation-delay:-1s;"></span>
+      <span class="particle" style="left:60%;top:60%;width:2px;height:2px;animation-duration:8s;animation-delay:-3s;"></span>
+      <span class="particle" style="left:75%;top:75%;width:4px;height:4px;animation-duration:10s;animation-delay:-0.5s;"></span>
+      <span class="particle" style="left:85%;top:50%;width:2px;height:2px;animation-duration:7.5s;animation-delay:-4s;"></span>
+      <span class="particle" style="left:20%;top:40%;width:3px;height:3px;animation-duration:8.5s;animation-delay:-1.5s;"></span>
+      <span class="particle" style="left:55%;top:30%;width:2px;height:2px;animation-duration:6.5s;animation-delay:-2.5s;"></span>
+    </div>
+
+    <!-- AI Scan -->
+    <div class="hero-scan"></div>
+
+    <!-- Glass Cards -->
+    <div class="glass-card gc-patients">
+      <div class="glass-card-icon"><span class="gc-dot"></span>Activo</div>
+      <div class="glass-card-val">+3,200</div>
+      <div class="glass-card-label">Pacientes tratados</div>
+    </div>
+    <div class="glass-card gc-tech">
+      <div class="glass-card-icon">&#9881; Tecnolog&#237;a</div>
+      <div class="glass-card-val">20+</div>
+      <div class="glass-card-label">Tratamientos regenerativos</div>
+    </div>
+    <div class="glass-card gc-live">
+      <div class="glass-card-icon"><span class="gc-dot"></span>Verificado</div>
+      <div class="glass-card-val">C&#233;d.</div>
+      <div class="glass-card-label">11686818</div>
     </div>
   </div>
 </section>
@@ -1331,6 +1535,7 @@ footer {
     <div class="contact-info">
       <div class="ci-row"><div class="ci-icon">📍</div><div><div class="ci-label">Dirección</div><div class="ci-value">Consultorio 511 · Torre Médica Otay</div><div class="ci-sub">Aeropuerto 16000, La Pechuga, 22425 Tijuana, B.C.</div></div></div>
       <div class="ci-row"><div class="ci-icon">📱</div><div><div class="ci-label">WhatsApp</div><div class="ci-value">+52 (664) 187 4089</div><div class="ci-sub">Agenda tu cita directamente</div></div></div>
+      <div class="ci-row"><div class="ci-icon">&#9993;</div><div><div class="ci-label">Correo electr&#243;nico</div><div class="ci-value">doctor@raulzuniga.com</div><div class="ci-sub">Consultas e informes generales</div></div></div>
       <div class="ci-row"><div class="ci-icon">🏥</div><div><div class="ci-label">Edificio</div><div class="ci-value">Torre Médica Otay</div><div class="ci-sub">Tijuana, Baja California</div></div></div>
       <div class="ci-row"><div class="ci-icon">💳</div><div><div class="ci-label">Formas de Pago</div><div class="ci-value">Efectivo · Tarjeta · Transferencia</div><div class="ci-sub">Solo pacientes privados</div></div></div>
       <div class="ci-row"><div class="ci-icon">🆔</div><div><div class="ci-label">Cédula Profesional</div><div class="ci-value">11686818</div><div class="ci-sub">Médico certificado y verificado</div></div></div>
