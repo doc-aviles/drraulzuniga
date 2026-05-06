@@ -302,223 +302,442 @@
 </section>
 
 <!-- ══ INSTAGRAM FEED ══ -->
-<section id="promocion" class="reveal section-dark" style="padding: 7rem 7%;">
+<section id="promocion" class="section-dark" style="padding:7rem 5% 8rem;position:relative;overflow:hidden;">
 <style>
-/* ─── INSTAGRAM FEED ─── */
-.ig-section-label {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(212,160,23,0.12);
-  border: 1px solid rgba(212,160,23,0.3);
-  color: var(--gold-bright);
-  font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  padding: 0.4rem 1.1rem; border-radius: 30px;
-  margin-bottom: 1.6rem;
+/* ─── IG WOW ─── */
+#ig2bg {
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
 }
-.ig-section-label-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold-bright);
-  animation: tagBlink2 1.8s ease-in-out infinite;
+#ig2bg::before {
+  content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(220,39,67,0.09) 0%,transparent 68%);
 }
-@keyframes tagBlink2 { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.ig-section-title {
-  font-family: 'Libre Baskerville', serif;
-  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
-  font-weight: 400; color: #fff;
-  line-height: 1.2; margin-bottom: 0.7rem;
-  text-align: center;
+#ig2bg::after {
+  content:'';position:absolute;bottom:-100px;right:-100px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(188,24,136,0.07) 0%,transparent 70%);
 }
-.ig-section-title em { font-style: italic; color: var(--gold-bright); }
-.ig-section-sub {
-  text-align: center;
-  color: rgba(255,255,255,0.6);
-  font-size: 0.92rem;
-  margin-bottom: 3rem;
+.ig2-inner { position:relative;z-index:1; }
+/* tag */
+.ig2-tag {
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:30px;padding:0.38rem 1.1rem 0.38rem 0.6rem;
+  margin-bottom:1.4rem;
 }
-.ig-profile-bar {
-  display: flex; align-items: center; gap: 1.2rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 1.1rem 1.5rem;
-  max-width: 480px;
-  margin: 0 auto 2.8rem;
-  backdrop-filter: blur(10px);
+.ig2-tag-logo {
+  width:26px;height:26px;border-radius:7px;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-.ig-avatar {
-  width: 54px; height: 54px; border-radius: 50%;
-  border: 2px solid transparent;
-  background: linear-gradient(#1a1a2e,#1a1a2e) padding-box,
-              linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888) border-box;
-  overflow: hidden; flex-shrink: 0;
+.ig2-tag-text {
+  font-size:0.7rem;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(255,255,255,0.65);
 }
-.ig-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.ig-profile-info { flex: 1; min-width: 0; }
-.ig-username {
-  font-weight: 700; font-size: 0.95rem; color: #fff;
-  margin-bottom: 0.2rem;
+/* title */
+.ig2-title {
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;color:#fff;
+  line-height:1.15;margin-bottom:0.7rem;
 }
-.ig-followers {
-  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+.ig2-title em {
+  font-style:italic;
+  background:linear-gradient(135deg,#f09433 0%,#dc2743 50%,#bc1888 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.ig-follow-btn {
-  display: inline-flex; align-items: center; gap: 0.4rem;
-  background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366);
-  color: #fff; font-size: 0.75rem; font-weight: 600;
-  padding: 0.45rem 1.1rem; border-radius: 50px;
-  text-decoration: none; white-space: nowrap;
-  transition: opacity 0.2s;
+.ig2-sub { color:rgba(255,255,255,0.45);font-size:0.9rem;margin-bottom:3.5rem; }
+/* profile card */
+.ig2-profile {
+  display:flex;align-items:center;gap:1.4rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:22px;padding:1.5rem 2rem;
+  max-width:580px;margin:0 auto 3rem;
+  backdrop-filter:blur(14px);
 }
-.ig-follow-btn:hover { opacity: 0.88; }
-.ig-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-width: 900px;
-  margin: 0 auto 2.8rem;
+.ig2-av-wrap {
+  position:relative;flex-shrink:0;width:72px;height:72px;
 }
-@media (max-width: 640px) {
-  .ig-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.ig2-av-ring {
+  position:absolute;inset:-3px;border-radius:50%;
+  background:conic-gradient(#f09433,#e6683c,#dc2743,#cc2366,#bc1888,#f09433);
+  animation:ig2Spin 3.5s linear infinite;
 }
-.ig-card {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  background: rgba(255,255,255,0.05);
+@keyframes ig2Spin { to { transform:rotate(360deg); } }
+.ig2-av-ring::after {
+  content:'';position:absolute;inset:2.5px;border-radius:50%;background:#0e1628;
 }
-.ig-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.45s ease;
+.ig2-av {
+  position:relative;z-index:1;
+  width:100%;height:100%;border-radius:50%;overflow:hidden;
 }
-.ig-card:hover img { transform: scale(1.07); }
-.ig-card-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  display: flex; flex-direction: column;
-  justify-content: flex-end;
-  padding: 1rem;
+.ig2-av img { width:100%;height:100%;object-fit:cover;display:block; }
+.ig2-pinfo { flex:1;min-width:0; }
+.ig2-handle { font-weight:700;font-size:1rem;color:#fff;margin-bottom:0.45rem; }
+.ig2-stats-row { display:flex;gap:1.6rem;margin-bottom:0.4rem; }
+.ig2-stat-num {
+  font-weight:700;font-size:1rem;
+  background:linear-gradient(135deg,#f09433,#dc2743);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
 }
-.ig-card:hover .ig-card-overlay { opacity: 1; }
-.ig-card-caption {
-  color: rgba(255,255,255,0.92);
-  font-size: 0.75rem;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.ig2-stat-lbl { font-size:0.67rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em; }
+.ig2-pbio { font-size:0.77rem;color:rgba(255,255,255,0.45);line-height:1.5; }
+.ig2-follow-cta {
+  display:inline-flex;align-items:center;gap:0.5rem;flex-shrink:0;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366);
+  color:#fff;font-size:0.8rem;font-weight:700;
+  padding:0.65rem 1.5rem;border-radius:50px;
+  text-decoration:none;
+  box-shadow:0 6px 22px rgba(220,39,67,0.35);
+  transition:transform 0.25s,box-shadow 0.25s;
 }
-.ig-card-type {
-  position: absolute; top: 8px; right: 10px;
-  color: rgba(255,255,255,0.85); font-size: 1rem;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+.ig2-follow-cta:hover { transform:translateY(-2px);box-shadow:0 10px 30px rgba(220,39,67,0.5); }
+/* GRID */
+.ig2-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-auto-rows:265px;
+  gap:11px;
+  max-width:980px;margin:0 auto 3rem;
 }
-.ig-skel {
-  aspect-ratio: 1 / 1;
-  border-radius: 10px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
-  background-size: 200% 100%;
-  animation: igSkel 1.4s infinite;
+.ig2-card {
+  position:relative;border-radius:16px;overflow:hidden;cursor:pointer;
+  background:rgba(255,255,255,0.04);
+  opacity:0;transform:translateY(28px) scale(0.97);
+  transition:opacity 0.5s ease,transform 0.5s ease,box-shadow 0.4s ease;
 }
-@keyframes igSkel { to { background-position: -200% 0; } }
-.ig-footer-cta {
-  text-align: center;
+.ig2-card.in { opacity:1;transform:translateY(0) scale(1); }
+.ig2-card.ig2-featured { grid-row:span 2; }
+.ig2-card img {
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.55s ease;
 }
-.ig-view-btn {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.8);
-  font-size: 0.85rem; font-weight: 500;
-  padding: 0.85rem 2.2rem; border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
+.ig2-card:hover { box-shadow:0 20px 56px rgba(0,0,0,0.6);transform:translateY(-4px) scale(1.01) !important; }
+.ig2-card:hover img { transform:scale(1.08); }
+/* overlay */
+.ig2-overlay {
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.3) 45%,transparent 75%);
+  opacity:0;transition:opacity 0.38s;
 }
-.ig-view-btn:hover {
-  background: rgba(255,255,255,0.13);
-  border-color: rgba(255,255,255,0.35);
-  color: #fff; transform: translateY(-2px);
+.ig2-card:hover .ig2-overlay { opacity:1; }
+.ig2-card-body {
+  position:absolute;bottom:0;left:0;right:0;padding:1.1rem;
+  transform:translateY(10px);opacity:0;
+  transition:transform 0.38s ease,opacity 0.38s ease;
 }
+.ig2-card:hover .ig2-card-body { transform:translateY(0);opacity:1; }
+.ig2-card-cap {
+  color:rgba(255,255,255,0.9);font-size:0.74rem;line-height:1.55;
+  display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;
+  -webkit-box-orient:vertical;overflow:hidden;margin-bottom:0.35rem;
+}
+.ig2-card-ts { font-size:0.66rem;color:rgba(255,255,255,0.4); }
+/* badge top-right */
+.ig2-badge {
+  position:absolute;top:10px;right:10px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);
+  border-radius:50%;width:28px;height:28px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+}
+/* play center */
+.ig2-play {
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
+  border:1.5px solid rgba(255,255,255,0.35);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;padding-left:4px;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.3s,transform 0.3s;
+}
+.ig2-card:hover .ig2-play { opacity:1;transform:translate(-50%,-50%) scale(1.1); }
+/* skeletons */
+.ig2-skel {
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);overflow:hidden;position:relative;
+}
+.ig2-skel::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.07) 50%,transparent 100%);
+  background-size:200% 100%;animation:ig2Sk 1.5s infinite;
+}
+@keyframes ig2Sk { to { background-position:-200% 0; } }
+/* CTA row */
+.ig2-cta { display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap; }
+.ig2-btn-ig {
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366);
+  color:#fff;font-size:0.85rem;font-weight:700;
+  padding:0.9rem 2.2rem;border-radius:50px;text-decoration:none;
+  box-shadow:0 8px 26px rgba(220,39,67,0.4);
+  transition:transform 0.25s,box-shadow 0.25s;
+}
+.ig2-btn-ig:hover { transform:translateY(-3px);box-shadow:0 12px 34px rgba(220,39,67,0.55); }
+.ig2-btn-wa {
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.75);font-size:0.85rem;font-weight:500;
+  padding:0.9rem 2.2rem;border-radius:50px;text-decoration:none;
+  transition:all 0.3s;
+}
+.ig2-btn-wa:hover { background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.3);color:#fff;transform:translateY(-2px); }
+/* MODAL */
+.ig2-modal {
+  position:fixed;inset:0;z-index:9900;
+  display:flex;align-items:center;justify-content:center;padding:1.5rem;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.ig2-modal.open { opacity:1;pointer-events:all; }
+.ig2-modal-bg {
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.87);backdrop-filter:blur(14px);
+}
+.ig2-modal-box {
+  position:relative;z-index:1;
+  display:flex;max-width:880px;width:100%;max-height:90vh;
+  background:rgba(14,18,38,0.98);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:22px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,0.75);
+  transform:scale(0.92) translateY(20px);
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.ig2-modal.open .ig2-modal-box { transform:scale(1) translateY(0); }
+.ig2-modal-img {
+  flex:0 0 48%;position:relative;background:#000;
+}
+.ig2-modal-img img {
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.ig2-modal-side {
+  flex:1;display:flex;flex-direction:column;overflow:hidden;
+  padding:0;
+}
+.ig2-modal-top {
+  display:flex;align-items:center;gap:0.8rem;
+  padding:1.4rem 1.6rem 1rem;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.ig2-modal-mav {
+  width:38px;height:38px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  border:2px solid transparent;
+  background:linear-gradient(#0e1226,#0e1226) padding-box,
+              linear-gradient(135deg,#f09433,#bc1888) border-box;
+}
+.ig2-modal-mav img { width:100%;height:100%;object-fit:cover; }
+.ig2-modal-user { font-weight:700;font-size:0.88rem;color:#fff; }
+.ig2-modal-date { font-size:0.7rem;color:rgba(255,255,255,0.38);margin-top:0.08rem; }
+.ig2-modal-caption {
+  flex:1;overflow-y:auto;
+  padding:1.2rem 1.6rem;
+  font-size:0.82rem;line-height:1.8;color:rgba(255,255,255,0.78);
+  white-space:pre-line;
+}
+.ig2-modal-caption::-webkit-scrollbar { width:4px; }
+.ig2-modal-caption::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.15);border-radius:2px; }
+.ig2-modal-htags {
+  display:flex;flex-wrap:wrap;gap:0.35rem;
+  padding:0.8rem 1.6rem;border-top:1px solid rgba(255,255,255,0.07);
+}
+.ig2-modal-htag {
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.5);font-size:0.7rem;
+  padding:0.22rem 0.65rem;border-radius:20px;
+}
+.ig2-modal-footer {
+  padding:1rem 1.6rem 1.4rem;
+}
+.ig2-modal-open {
+  display:flex;align-items:center;justify-content:center;gap:0.5rem;
+  background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);
+  color:#fff;font-size:0.8rem;font-weight:700;
+  padding:0.7rem 1.4rem;border-radius:50px;text-decoration:none;
+  transition:opacity 0.2s,transform 0.2s;
+}
+.ig2-modal-open:hover { opacity:0.88;transform:translateY(-1px); }
+.ig2-modal-close {
+  position:absolute;top:12px;right:14px;z-index:2;
+  background:rgba(255,255,255,0.1);border:none;cursor:pointer;
+  width:32px;height:32px;border-radius:50%;color:rgba(255,255,255,0.7);
+  font-size:1rem;display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s;
+}
+.ig2-modal-close:hover { background:rgba(255,255,255,0.2);color:#fff; }
+@media (max-width:700px) {
+  .ig2-grid { grid-template-columns:repeat(2,1fr);grid-auto-rows:180px; }
+  .ig2-card.ig2-featured { grid-row:span 1; }
+  .ig2-profile { flex-direction:column;text-align:center; }
+  .ig2-stats-row { justify-content:center; }
+  .ig2-modal-box { flex-direction:column;max-height:95vh; }
+  .ig2-modal-img { flex:0 0 220px; }
+}
+.ig-section-label { display:none; }
 </style>
 
-  <div style="text-align:center;">
-    <div class="ig-section-label" style="display:inline-flex;">
-      <span class="ig-section-label-dot"></span>
-      Instagram
-    </div>
-  </div>
-  <h3 class="ig-section-title">Nuestro <em>contenido</em> más reciente</h3>
-  <p class="ig-section-sub">Tratamientos, resultados y novedades — directo desde el consultorio</p>
+<div id="ig2bg"></div>
+<div class="ig2-inner">
 
-  <div class="ig-profile-bar">
-    <div class="ig-avatar">
-      <img src="https://cdn2.behold.pictures/D0QIm5gdX4OCby8ioMdQAZb2RRx1/17841462690595264/profile.webp" alt="Dr. Raúl Zúñiga" loading="lazy">
+  <div style="text-align:center;">
+    <div class="ig2-tag" style="display:inline-flex;">
+      <div class="ig2-tag-logo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </div>
+      <span class="ig2-tag-text">Instagram</span>
     </div>
-    <div class="ig-profile-info">
-      <div class="ig-username">@dr.raul.zuniga_</div>
-      <div class="ig-followers">3,855 seguidores · Medicina Estética y Antienvejecimiento</div>
+    <h3 class="ig2-title">Nuestro contenido <em>más reciente</em></h3>
+    <p class="ig2-sub">Tratamientos, resultados y novedades directo del consultorio</p>
+  </div>
+
+  <div class="ig2-profile">
+    <div class="ig2-av-wrap">
+      <div class="ig2-av-ring"></div>
+      <div class="ig2-av">
+        <img src="https://cdn2.behold.pictures/D0QIm5gdX4OCby8ioMdQAZb2RRx1/17841462690595264/profile.webp" alt="Dr. Raúl Zúñiga" loading="lazy">
+      </div>
     </div>
-    <a class="ig-follow-btn" href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" rel="noopener">
+    <div class="ig2-pinfo">
+      <div class="ig2-handle">@dr.raul.zuniga_</div>
+      <div class="ig2-stats-row">
+        <div class="ig2-stat">
+          <div class="ig2-stat-num" id="ig2Followers">3,855</div>
+          <div class="ig2-stat-lbl">Seguidores</div>
+        </div>
+        <div class="ig2-stat">
+          <div class="ig2-stat-num" id="ig2Posts">—</div>
+          <div class="ig2-stat-lbl">Publicaciones</div>
+        </div>
+      </div>
+      <div class="ig2-pbio">Medicina Estética y Antienvejecimiento · Tijuana, B.C.</div>
+    </div>
+    <a class="ig2-follow-cta" href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
       Seguir
     </a>
   </div>
 
-  <div class="ig-grid" id="igGrid">
-    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
-    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
-    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
+  <div class="ig2-grid" id="ig2Grid">
+    <div class="ig2-skel" style="grid-row:span 2"></div>
+    <div class="ig2-skel"></div><div class="ig2-skel"></div>
+    <div class="ig2-skel"></div><div class="ig2-skel"></div>
+    <div class="ig2-skel"></div><div class="ig2-skel"></div><div class="ig2-skel"></div>
   </div>
 
-  <div class="ig-footer-cta">
-    <a class="ig-view-btn" href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" rel="noopener">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+  <div class="ig2-cta">
+    <a class="ig2-btn-ig" href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" rel="noopener">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       Ver perfil en Instagram
+    </a>
+    <a class="ig2-btn-wa" href="https://wa.me/526641874089" target="_blank" rel="noopener">
+      Agendar cita por WhatsApp
     </a>
   </div>
 
-  <script>
-  (function(){
-    var FEED = 'https://feeds.behold.so/I4uqFeMSg1OAU0LqIssl';
-    var grid = document.getElementById('igGrid');
-    fetch(FEED)
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        var posts = (data.posts || data).slice(0, 9);
-        grid.innerHTML = '';
-        posts.forEach(function(p){
-          var img = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
-            || p.thumbnailUrl || p.mediaUrl || '';
-          var caption = (p.prunedCaption || p.caption || '').replace(/\n/g,' ').trim();
-          var short = caption.length > 120 ? caption.slice(0,120)+'…' : caption;
-          var typeIcon = p.isReel || p.mediaType === 'VIDEO'
-            ? '&#9654;'
-            : p.mediaType === 'CAROUSEL_ALBUM' ? '&#10697;' : '';
-          var card = document.createElement('a');
-          card.href = p.permalink || '#';
-          card.target = '_blank';
-          card.rel = 'noopener';
-          card.className = 'ig-card';
-          card.innerHTML =
-            '<img src="'+img+'" alt="Post Instagram Dr. Raúl Zúñiga" loading="lazy">'
-            +(typeIcon ? '<div class="ig-card-type">'+typeIcon+'</div>' : '')
-            +'<div class="ig-card-overlay">'
-            +(short ? '<p class="ig-card-caption">'+short+'</p>' : '')
-            +'</div>';
-          grid.appendChild(card);
-        });
-      })
-      .catch(function(){
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar el feed. <a href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" style="color:var(--gold-bright);">Ver en Instagram</a></div>';
+</div>
+
+<!-- Lightbox -->
+<div class="ig2-modal" id="ig2Modal" role="dialog" aria-modal="true">
+  <div class="ig2-modal-bg" id="ig2ModalBg"></div>
+  <div class="ig2-modal-box">
+    <div class="ig2-modal-img">
+      <img src="" alt="" id="ig2ModalImg">
+    </div>
+    <div class="ig2-modal-side">
+      <div class="ig2-modal-top">
+        <div class="ig2-modal-mav">
+          <img src="https://cdn2.behold.pictures/D0QIm5gdX4OCby8ioMdQAZb2RRx1/17841462690595264/profile.webp" alt="">
+        </div>
+        <div>
+          <div class="ig2-modal-user">@dr.raul.zuniga_</div>
+          <div class="ig2-modal-date" id="ig2ModalDate"></div>
+        </div>
+      </div>
+      <div class="ig2-modal-caption" id="ig2ModalCaption"></div>
+      <div class="ig2-modal-htags" id="ig2ModalTags"></div>
+      <div class="ig2-modal-footer">
+        <a class="ig2-modal-open" id="ig2ModalLink" href="#" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Ver en Instagram
+        </a>
+      </div>
+    </div>
+    <button class="ig2-modal-close" id="ig2ModalClose" aria-label="Cerrar">&#10005;</button>
+  </div>
+</div>
+
+<script>(function(){
+  var FEED='https://feeds.behold.so/I4uqFeMSg1OAU0LqIssl';
+  var grid=document.getElementById('ig2Grid');
+  var modal=document.getElementById('ig2Modal');
+  var mImg=document.getElementById('ig2ModalImg');
+  var mDate=document.getElementById('ig2ModalDate');
+  var mCap=document.getElementById('ig2ModalCaption');
+  var mTags=document.getElementById('ig2ModalTags');
+  var mLink=document.getElementById('ig2ModalLink');
+
+  function fmt(ts){
+    try{ return new Date(ts).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'}); }
+    catch(e){ return ''; }
+  }
+  function countUp(el,target){
+    var n=0,step=Math.ceil(target/60);
+    var t=setInterval(function(){ n=Math.min(n+step,target); el.textContent=n.toLocaleString('es-MX'); if(n>=target)clearInterval(t); },18);
+  }
+  function openModal(p){
+    var big=(p.sizes&&p.sizes.large&&p.sizes.large.mediaUrl)||p.thumbnailUrl||'';
+    mImg.src=big; mImg.alt='Post Dr. Raúl Zúñiga';
+    mDate.textContent=fmt(p.timestamp);
+    mCap.textContent=p.caption||'';
+    mTags.innerHTML='';
+    (p.hashtags||[]).slice(0,10).forEach(function(h){ var s=document.createElement('span'); s.className='ig2-modal-htag'; s.textContent='#'+h; mTags.appendChild(s); });
+    mLink.href=p.permalink||'#';
+    modal.classList.add('open'); document.body.style.overflow='hidden';
+  }
+  function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; setTimeout(function(){ mImg.src=''; },320); }
+
+  document.getElementById('ig2ModalClose').addEventListener('click',closeModal);
+  document.getElementById('ig2ModalBg').addEventListener('click',closeModal);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape')closeModal(); });
+
+  fetch(FEED)
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var posts=(data.posts||data).slice(0,8);
+      if(data.followersCount) countUp(document.getElementById('ig2Followers'),data.followersCount);
+      document.getElementById('ig2Posts').textContent=posts.length+'+';
+      grid.innerHTML='';
+      posts.forEach(function(p,i){
+        var img=(p.sizes&&p.sizes.medium&&p.sizes.medium.mediaUrl)||p.thumbnailUrl||'';
+        var isVid=p.isReel||p.mediaType==='VIDEO';
+        var isCar=p.mediaType==='CAROUSEL_ALBUM';
+        var cap=(p.prunedCaption||p.caption||'').trim();
+        var short=cap.length>95?cap.slice(0,95)+'…':cap;
+        var card=document.createElement('div');
+        card.className='ig2-card'+(i===0?' ig2-featured':'');
+        card.style.transitionDelay=(i*0.06)+'s';
+        card.setAttribute('role','button'); card.setAttribute('tabindex','0');
+        card.innerHTML=
+          '<img src="'+img+'" alt="Post Dr. Raúl Zúñiga" loading="lazy">'
+          +(isCar?'<div class="ig2-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg></div>':'')
+          +(isVid?'<div class="ig2-play"><svg width="11" height="14" viewBox="0 0 11 14" fill="white"><path d="M0 0l11 7-11 7V0z"/></svg></div>':'')
+          +'<div class="ig2-overlay"></div>'
+          +'<div class="ig2-card-body">'
+          +(short?'<p class="ig2-card-cap">'+short+'</p>':'')
+          +'<span class="ig2-card-ts">'+fmt(p.timestamp)+'</span>'
+          +'</div>';
+        card.addEventListener('click',function(){ openModal(p); });
+        card.addEventListener('keydown',function(e){ if(e.key==='Enter')openModal(p); });
+        grid.appendChild(card);
+        requestAnimationFrame(function(){ setTimeout(function(){ card.classList.add('in'); },i*70); });
       });
-  })();
-  </script>
+    })
+    .catch(function(){
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar el feed. <a href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" style="color:var(--gold-bright);">Ver en Instagram</a></div>';
+    });
+})();</script>
 </section>
 
 <!-- ══ TESTIMONIALS ══ -->
