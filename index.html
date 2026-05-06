@@ -301,50 +301,11 @@
   </div>
 </section>
 
-<!-- ══ PROMO ══ -->
+<!-- ══ INSTAGRAM FEED ══ -->
 <section id="promocion" class="reveal section-dark" style="padding: 7rem 7%;">
-  <style>
-/* ─── PROMO COMING SOON ─── */
-.promo-soon {
-  text-align: center;
-  padding: 5rem 2rem;
-  position: relative;
-}
-.promo-soon-ring {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 110px; height: 110px;
-  margin: 0 auto 2.5rem;
-}
-.promo-soon-ring::before,
-.promo-soon-ring::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  border: 1.5px solid rgba(212,160,23,0.35);
-  animation: ringPulse 3s ease-in-out infinite;
-}
-.promo-soon-ring::before { inset: 0; animation-delay: 0s; }
-.promo-soon-ring::after  { inset: -14px; animation-delay: 0.5s; opacity: 0.5; }
-@keyframes ringPulse {
-  0%,100% { transform: scale(1); opacity: 0.6; }
-  50%      { transform: scale(1.08); opacity: 1; }
-}
-.promo-soon-icon {
-  width: 70px; height: 70px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--teal-deep), var(--teal));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem;
-  box-shadow: 0 0 0 0 rgba(27,107,110,0.4);
-  animation: iconGlow 3s ease-in-out infinite;
-}
-@keyframes iconGlow {
-  0%,100% { box-shadow: 0 0 0 0 rgba(27,107,110,0.4); }
-  50%      { box-shadow: 0 0 0 18px rgba(27,107,110,0); }
-}
-.promo-soon-tag {
+<style>
+/* ─── INSTAGRAM FEED ─── */
+.ig-section-label {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: rgba(212,160,23,0.12);
   border: 1px solid rgba(212,160,23,0.3);
@@ -352,79 +313,212 @@
   font-size: 0.68rem; font-weight: 700;
   letter-spacing: 0.22em; text-transform: uppercase;
   padding: 0.4rem 1.1rem; border-radius: 30px;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.6rem;
 }
-.promo-soon-tag-dot {
+.ig-section-label-dot {
   width: 5px; height: 5px; border-radius: 50%;
   background: var(--gold-bright);
-  animation: tagBlink 1.8s ease-in-out infinite;
+  animation: tagBlink2 1.8s ease-in-out infinite;
 }
-@keyframes tagBlink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-.promo-soon-h {
+@keyframes tagBlink2 { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.ig-section-title {
   font-family: 'Libre Baskerville', serif;
-  font-size: clamp(1.9rem, 3.5vw, 3rem);
-  font-weight: 400; color: #FFFFFF;
-  line-height: 1.2; margin-bottom: 1.2rem;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  font-weight: 400; color: #fff;
+  line-height: 1.2; margin-bottom: 0.7rem;
+  text-align: center;
 }
-.promo-soon-h em { font-style: italic; color: var(--gold-bright); }
-.promo-soon-desc {
-  font-size: 1rem; line-height: 1.85;
-  color: rgba(255,255,255,0.78);
-  max-width: 500px; margin: 0 auto 2.5rem;
+.ig-section-title em { font-style: italic; color: var(--gold-bright); }
+.ig-section-sub {
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.92rem;
+  margin-bottom: 3rem;
 }
-.promo-soon-cta {
+.ig-profile-bar {
+  display: flex; align-items: center; gap: 1.2rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.1rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto 2.8rem;
+  backdrop-filter: blur(10px);
+}
+.ig-avatar {
+  width: 54px; height: 54px; border-radius: 50%;
+  border: 2px solid transparent;
+  background: linear-gradient(#1a1a2e,#1a1a2e) padding-box,
+              linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888) border-box;
+  overflow: hidden; flex-shrink: 0;
+}
+.ig-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.ig-profile-info { flex: 1; min-width: 0; }
+.ig-username {
+  font-weight: 700; font-size: 0.95rem; color: #fff;
+  margin-bottom: 0.2rem;
+}
+.ig-followers {
+  font-size: 0.78rem; color: rgba(255,255,255,0.55);
+}
+.ig-follow-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366);
+  color: #fff; font-size: 0.75rem; font-weight: 600;
+  padding: 0.45rem 1.1rem; border-radius: 50px;
+  text-decoration: none; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.ig-follow-btn:hover { opacity: 0.88; }
+.ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto 2.8rem;
+}
+@media (max-width: 640px) {
+  .ig-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+}
+.ig-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255,255,255,0.05);
+}
+.ig-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.ig-card:hover img { transform: scale(1.07); }
+.ig-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+.ig-card:hover .ig-card-overlay { opacity: 1; }
+.ig-card-caption {
+  color: rgba(255,255,255,0.92);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ig-card-type {
+  position: absolute; top: 8px; right: 10px;
+  color: rgba(255,255,255,0.85); font-size: 1rem;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+.ig-skel {
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: igSkel 1.4s infinite;
+}
+@keyframes igSkel { to { background-position: -200% 0; } }
+.ig-footer-cta {
+  text-align: center;
+}
+.ig-view-btn {
   display: inline-flex; align-items: center; gap: 0.6rem;
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.75);
-  font-size: 0.82rem; font-weight: 500;
-  padding: 0.85rem 2rem; border-radius: 50px;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.85rem; font-weight: 500;
+  padding: 0.85rem 2.2rem; border-radius: 50px;
+  text-decoration: none;
   transition: all 0.3s ease;
 }
-.promo-soon-cta:hover {
+.ig-view-btn:hover {
   background: rgba(255,255,255,0.13);
   border-color: rgba(255,255,255,0.35);
-  color: white;
-  transform: translateY(-2px);
+  color: #fff; transform: translateY(-2px);
 }
-.promo-soon-dots {
-  display: flex; justify-content: center; gap: 0.5rem;
-  margin-top: 2.5rem;
-}
-.promo-soon-dots span {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  animation: dotWave 1.6s ease-in-out infinite;
-}
-.promo-soon-dots span:nth-child(2) { animation-delay: 0.2s; }
-.promo-soon-dots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes dotWave { 0%,100%{transform:translateY(0);opacity:0.25} 50%{transform:translateY(-5px);opacity:1} }
 </style>
 
-  <div class="promo-soon">
-    <div class="promo-soon-ring">
-      <div class="promo-soon-icon">&#10024;</div>
-    </div>
-    <div class="promo-soon-tag">
-      <span class="promo-soon-tag-dot"></span>
-      Pr&#243;ximamente
-    </div>
-    <h3 class="promo-soon-h">
-      Grandes <em>sorpresas</em><br>est&#225;n por llegar
-    </h3>
-    <p class="promo-soon-desc">
-      Estamos preparando promociones exclusivas y tratamientos especiales 
-      que no querrás perderte. S&#233; el primero en enterarte escribiéndonos por WhatsApp.
-    </p>
-    <a class="promo-soon-cta" href="https://wa.me/526641874089?text=Hola%20Dr.%20Z%C3%BA%C3%B1iga%2C%20quiero%20recibir%20informaci%C3%B3n%20sobre%20sus%20pr%C3%B3ximas%20promociones" target="_blank">
-      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Avis&#225;me cuando haya promociones
-    </a>
-    <div class="promo-soon-dots">
-      <span></span><span></span><span></span>
+  <div style="text-align:center;">
+    <div class="ig-section-label" style="display:inline-flex;">
+      <span class="ig-section-label-dot"></span>
+      Instagram
     </div>
   </div>
+  <h3 class="ig-section-title">Nuestro <em>contenido</em> más reciente</h3>
+  <p class="ig-section-sub">Tratamientos, resultados y novedades — directo desde el consultorio</p>
+
+  <div class="ig-profile-bar">
+    <div class="ig-avatar">
+      <img src="https://cdn2.behold.pictures/D0QIm5gdX4OCby8ioMdQAZb2RRx1/17841462690595264/profile.webp" alt="Dr. Raúl Zúñiga" loading="lazy">
+    </div>
+    <div class="ig-profile-info">
+      <div class="ig-username">@dr.raul.zuniga_</div>
+      <div class="ig-followers">3,855 seguidores · Medicina Estética y Antienvejecimiento</div>
+    </div>
+    <a class="ig-follow-btn" href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" rel="noopener">
+      Seguir
+    </a>
+  </div>
+
+  <div class="ig-grid" id="igGrid">
+    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
+    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
+    <div class="ig-skel"></div><div class="ig-skel"></div><div class="ig-skel"></div>
+  </div>
+
+  <div class="ig-footer-cta">
+    <a class="ig-view-btn" href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Ver perfil en Instagram
+    </a>
+  </div>
+
+  <script>
+  (function(){
+    var FEED = 'https://feeds.behold.so/I4uqFeMSg1OAU0LqIssl';
+    var grid = document.getElementById('igGrid');
+    fetch(FEED)
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var posts = (data.posts || data).slice(0, 9);
+        grid.innerHTML = '';
+        posts.forEach(function(p){
+          var img = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl)
+            || p.thumbnailUrl || p.mediaUrl || '';
+          var caption = (p.prunedCaption || p.caption || '').replace(/\n/g,' ').trim();
+          var short = caption.length > 120 ? caption.slice(0,120)+'…' : caption;
+          var typeIcon = p.isReel || p.mediaType === 'VIDEO'
+            ? '&#9654;'
+            : p.mediaType === 'CAROUSEL_ALBUM' ? '&#10697;' : '';
+          var card = document.createElement('a');
+          card.href = p.permalink || '#';
+          card.target = '_blank';
+          card.rel = 'noopener';
+          card.className = 'ig-card';
+          card.innerHTML =
+            '<img src="'+img+'" alt="Post Instagram Dr. Raúl Zúñiga" loading="lazy">'
+            +(typeIcon ? '<div class="ig-card-type">'+typeIcon+'</div>' : '')
+            +'<div class="ig-card-overlay">'
+            +(short ? '<p class="ig-card-caption">'+short+'</p>' : '')
+            +'</div>';
+          grid.appendChild(card);
+        });
+      })
+      .catch(function(){
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar el feed. <a href="https://www.instagram.com/dr.raul.zuniga_/" target="_blank" style="color:var(--gold-bright);">Ver en Instagram</a></div>';
+      });
+  })();
+  </script>
 </section>
 
 <!-- ══ TESTIMONIALS ══ -->
