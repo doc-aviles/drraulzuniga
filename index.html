@@ -678,37 +678,40 @@
   document.getElementById('ig2ModalBg').addEventListener('click',closeModal);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape')closeModal(); });
 
-  fetch(FEED)
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      var photos=(data.images||[]).slice(0,8);
-      var countEl=document.getElementById('ig2PhotoCount');
-      if(countEl) countEl.textContent=(data.images||[]).length;
-      if(!photos.length){
-        grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">La galería está vacía. Sube fotos a tu carpeta de Drive para que aparezcan aquí.</div>';
-        return;
-      }
-      grid.innerHTML='';
-      photos.forEach(function(img,i){
-        var card=document.createElement('div');
-        card.className='ig2-card'+(i===0?' ig2-featured':'');
-        card.style.transitionDelay=(i*0.06)+'s';
-        card.setAttribute('role','button'); card.setAttribute('tabindex','0');
-        card.innerHTML=
-          '<img src="'+img.thumb+'" alt="'+(img.name||'Foto consultorio')+'" loading="lazy">'
-          +'<div class="ig2-overlay"></div>'
-          +'<div class="ig2-card-body">'
-          +'<span class="ig2-card-ts">'+fmt(img.date)+'</span>'
-          +'</div>';
-        card.addEventListener('click',function(){ openModal(img); });
-        card.addEventListener('keydown',function(e){ if(e.key==='Enter') openModal(img); });
-        grid.appendChild(card);
-        requestAnimationFrame(function(){ setTimeout(function(){ card.classList.add('in'); },i*70); });
-      });
-    })
-    .catch(function(err){
-      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar la galería. Intenta de nuevo más tarde.</div>';
+  function renderPhotos(data){
+    var photos=(data.images||[]).slice(0,8);
+    var countEl=document.getElementById('ig2PhotoCount');
+    if(countEl) countEl.textContent=(data.images||[]).length;
+    if(!photos.length){
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">La galería está vacía. Sube fotos a tu carpeta de Drive para que aparezcan aquí.</div>';
+      return;
+    }
+    grid.innerHTML='';
+    photos.forEach(function(img,i){
+      var card=document.createElement('div');
+      card.className='ig2-card'+(i===0?' ig2-featured':'');
+      card.style.transitionDelay=(i*0.06)+'s';
+      card.setAttribute('role','button'); card.setAttribute('tabindex','0');
+      card.innerHTML=
+        '<img src="'+img.thumb+'" alt="'+(img.name||'Foto consultorio')+'" loading="lazy">'
+        +'<div class="ig2-overlay"></div>'
+        +'<div class="ig2-card-body">'
+        +'<span class="ig2-card-ts">'+fmt(img.date)+'</span>'
+        +'</div>';
+      card.addEventListener('click',function(){ openModal(img); });
+      card.addEventListener('keydown',function(e){ if(e.key==='Enter') openModal(img); });
+      grid.appendChild(card);
+      requestAnimationFrame(function(){ setTimeout(function(){ card.classList.add('in'); },i*70); });
     });
+  }
+
+  var cbName='driveGallery_'+Date.now();
+  window[cbName]=function(data){ delete window[cbName]; document.getElementById('driveScript').remove(); renderPhotos(data); };
+  var s=document.createElement('script');
+  s.id='driveScript';
+  s.onerror=function(){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar la galería. Intenta de nuevo más tarde.</div>'; };
+  s.src=FEED+'?callback='+cbName;
+  document.head.appendChild(s);
 })();</script>
 </section>
 
