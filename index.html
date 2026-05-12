@@ -653,8 +653,10 @@
     try{ return new Date(ts).toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'}); }
     catch(e){ return ''; }
   }
+  function imgUrl(id, size){ return 'https://lh3.googleusercontent.com/d/'+id+'=w'+size; }
+
   function openModal(img){
-    mImg.src=img.full; mImg.alt=img.name||'Foto Dr. Raúl Zúñiga';
+    mImg.src=imgUrl(img.id,1200); mImg.alt=img.name||'Foto Dr. Raúl Zúñiga';
     mDate.textContent=fmt(img.date);
     modal.classList.add('open'); document.body.style.overflow='hidden';
   }
@@ -665,11 +667,9 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape')closeModal(); });
 
   function renderPhotos(data){
-    var photos=(data.images||[]).slice(0,8);
-    var countEl=document.getElementById('ig2PhotoCount');
-    if(countEl) countEl.textContent=(data.images||[]).length;
+    var photos=(data.images||[]).slice(0,9);
     if(!photos.length){
-      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">La galería está vacía. Sube fotos a tu carpeta de Drive para que aparezcan aquí.</div>';
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">La galería está vacía. Sube fotos a tu carpeta de Drive.</div>';
       return;
     }
     grid.innerHTML='';
@@ -679,7 +679,7 @@
       card.style.transitionDelay=(i*0.06)+'s';
       card.setAttribute('role','button'); card.setAttribute('tabindex','0');
       card.innerHTML=
-        '<img src="'+img.thumb+'" alt="'+(img.name||'Foto consultorio')+'" loading="lazy">'
+        '<img src="'+imgUrl(img.id,600)+'" alt="'+(img.name||'Foto consultorio')+'" loading="lazy">'
         +'<div class="ig2-overlay"></div>'
         +'<div class="ig2-card-body">'
         +'<span class="ig2-card-ts">'+fmt(img.date)+'</span>'
@@ -691,11 +691,15 @@
     });
   }
 
+  var timeout=setTimeout(function(){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">Cargando galería...<br><small>Si no carga, recarga la página.</small></div>';
+  },8000);
+
   var cbName='driveGallery_'+Date.now();
-  window[cbName]=function(data){ delete window[cbName]; document.getElementById('driveScript').remove(); renderPhotos(data); };
+  window[cbName]=function(data){ clearTimeout(timeout); delete window[cbName]; var el=document.getElementById('driveScript'); if(el)el.remove(); renderPhotos(data); };
   var s=document.createElement('script');
   s.id='driveScript';
-  s.onerror=function(){ grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar la galería. Intenta de nuevo más tarde.</div>'; };
+  s.onerror=function(){ clearTimeout(timeout); grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar la galería.</div>'; };
   s.src=FEED+'?callback='+cbName;
   document.head.appendChild(s);
 })();</script>
