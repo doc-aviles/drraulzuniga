@@ -691,17 +691,17 @@
     });
   }
 
-  var timeout=setTimeout(function(){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">Cargando galería...<br><small>Si no carga, recarga la página.</small></div>';
-  },8000);
-
-  var cbName='driveGallery_'+Date.now();
-  window[cbName]=function(data){ clearTimeout(timeout); delete window[cbName]; var el=document.getElementById('driveScript'); if(el)el.remove(); renderPhotos(data); };
-  var s=document.createElement('script');
-  s.id='driveScript';
-  s.onerror=function(){ clearTimeout(timeout); grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar la galería.</div>'; };
-  s.src=FEED+'?callback='+cbName;
-  document.head.appendChild(s);
+  fetch(FEED)
+    .then(function(r){ return r.json(); })
+    .then(renderPhotos)
+    .catch(function(){
+      return fetch(FEED.replace('exec','exec')+'?t='+Date.now())
+        .then(function(r){ return r.json(); })
+        .then(renderPhotos)
+        .catch(function(){
+          grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:rgba(255,255,255,0.4);padding:3rem 0;">No se pudo cargar la galería.</div>';
+        });
+    });
 })();</script>
 </section>
 
